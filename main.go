@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 var allColumns = [][9]string{
 	{"5", "6", ".", "8", "4", "7", ".", ".", "."},
 	{"3", ".", "9", ".", ".", ".", "6", ".", "."},
@@ -64,7 +66,13 @@ func placeNumber(num string, row, col int) bool {
 }
 
 func main() {
+	fmt.Println("init")
+	for i := 0; i < 9; i++ {
+		fmt.Println(allRows[i])
+	}
 
+	//TODO En azindan "." nerede oldugunu bulan fonksiyon lazim
+	//TODO random int donen bir fonksiyon
 	/*
 	   Write a program to solve a Sudoku puzzle by filling the empty cells.
 
