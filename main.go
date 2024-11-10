@@ -28,6 +28,21 @@ var allRows = [][9]string{
 	{".", ".", ".", ".", "8", ".", ".", "7", "9"},
 }
 
+func emptyControl() [][2]int {
+	var emptySlice [][2]int
+	for x := 0; x < 9; x++ {
+		if allRows[0][x] == "." {
+			emptySlice = append(emptySlice, [2]int{0, x})
+		}
+	}
+	for i := 0; i < 9; i++ {
+		if allColumns[i][0] == "." {
+			emptySlice = append(emptySlice, [2]int{i, 0})
+		}
+	}
+	return emptySlice
+}
+
 func correctionCheck(num string, inputColumn, inputRow int) bool {
 	for i := 0; i < 9; i++ {
 		if allRows[inputRow][i] == num {
@@ -69,6 +84,13 @@ func main() {
 	fmt.Println("init")
 	for i := 0; i < 9; i++ {
 		fmt.Println(allRows[i])
+	}
+
+	emptyController := emptyControl()
+	fmt.Printf("toplam %d bos hucre\n", len(emptyController))
+
+	for _, empty := range emptyController {
+		fmt.Printf("satir =  %d, sutun =  %d\n", empty[0], empty[1])
 	}
 
 	//TODO En azindan "." nerede oldugunu bulan fonksiyon lazim
