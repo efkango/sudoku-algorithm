@@ -51,16 +51,6 @@ func correctionCheck(num string, inputColumn, inputRow int) bool {
 	return true
 }
 
-func placeNumber(numStr string, row, col int) {
-	allRows[row][col] = numStr
-	allColumns[col][row] = numStr
-}
-
-func removeNumber(row, col int) {
-	allRows[row][col] = "."
-	allColumns[col][row] = "."
-}
-
 func main() {
 
 	/*
