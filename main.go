@@ -51,6 +51,13 @@ func correctionCheck(num string, inputColumn, inputRow int) bool {
 	return true
 }
 
+func placeNumber(num string, row, col int) bool {
+	if row < 0 || row >= 9 || col < 0 || col >= 9 {
+		return false
+	}
+	return false
+}
+
 func main() {
 
 	/*
