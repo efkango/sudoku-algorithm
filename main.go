@@ -55,6 +55,11 @@ func placeNumber(num string, row, col int) bool {
 	if row < 0 || row >= 9 || col < 0 || col >= 9 {
 		return false
 	}
+	if correctionCheck(num, row, col) {
+		allRows[row][col] = num
+		allColumns[col][row] = num
+		return true
+	}
 	return false
 }
 
