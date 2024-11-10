@@ -28,33 +28,30 @@ var allRows = [][9]string{
 	{".", ".", ".", ".", "8", ".", ".", "7", "9"},
 }
 
-func correctionCheck(num string, rowNumber, columnNumber int) bool {
+func correctionCheck(num string, inputColumn, inputRow int) bool {
 	for i := 0; i < 9; i++ {
-		if allRows[rowNumber][i] == num {
+		if allRows[inputRow][i] == num {
 			return false
 		}
 	}
 
-	for a := 0; a < 9; a++ {
-		if allColumns[columnNumber][a] == num {
+	for x := 0; x < 9; x++ {
+		if allColumns[inputRow][x] == num {
 			return false
 		}
 	}
 
-	// 3x3 kutuları kontrol et
-	startRow := (rowNumber / 3) * 3    // 7 ÷ 3 = 2 , 2 * 3 = 6 // iki ornekte bu matematiksel ifadenin isleyisi mevcut 7/3 gibi bir islemden
-	startCol := (columnNumber / 3) * 3 //4 ÷ 3 = 1 , 1 * 3 = 3  // variable larimiz int oldugu icin tam sayi cikmaktadir
-	for i := 0; i < 3; i++ {           //yukaridan asagi 3 kare
-		for b := 0; b < 3; b++ { //soldan saga 3 kare
+	startRow := (inputRow / 3) * 3
+	startCol := (inputColumn / 3) * 3
+	for i := 0; i < 3; i++ {
+		for b := 0; i < 3; i++ {
 			if allRows[startRow+i][startCol+b] == num {
 				return false
 			}
 		}
 	}
-
 	return true
 }
-
 func fixGrids() bool {
 	for rowNumber := 0; rowNumber < 9; rowNumber++ { //satirlari dondurur
 		for colIndex := 0; colIndex < 9; colIndex++ { // sutunlari dondurur
