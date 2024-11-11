@@ -30,16 +30,15 @@ var allRows = [][9]string{
 
 func emptyControl() [][2]int {
 	var emptySlice [][2]int
-	for x := 0; x < 9; x++ {
-		if allRows[0][x] == "." {
-			emptySlice = append(emptySlice, [2]int{0, x})
-		}
-	}
+
 	for i := 0; i < 9; i++ {
-		if allColumns[i][0] == "." {
-			emptySlice = append(emptySlice, [2]int{i, 0})
+		for x := 0; x < 9; x++ {
+			if allRows[i][x] == "." {
+				emptySlice = append(emptySlice, [2]int{i, x})
+			}
 		}
 	}
+
 	return emptySlice
 }
 
