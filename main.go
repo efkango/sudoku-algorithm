@@ -88,7 +88,7 @@ func correctionCheck(num string, inputColumn, inputRow int) bool {
 }
 
 func placeNumber(num string, row, col int) bool {
-	if correctionCheck(num, row, col) {
+	if correctionCheck(num, col, row) {
 		allRows[row][col] = num
 		allColumns[col][row] = num
 		return true
