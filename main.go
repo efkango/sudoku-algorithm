@@ -17,9 +17,6 @@ var allColumns = [][9]string{
 	{".", ".", "6", ".", ".", ".", "8", ".", "7"},
 	{".", ".", ".", "3", "1", "6", ".", "5", "9"},
 }
-
-// ilk parantez hangi liste ikinci parantez o listenin hangi elemani
-
 var allRows = [][9]string{
 	{"5", "3", ".", ".", "7", ".", ".", ".", "."},
 	{"6", ".", ".", "1", "9", "5", ".", ".", "."},
@@ -30,6 +27,32 @@ var allRows = [][9]string{
 	{".", "6", ".", ".", ".", ".", "2", "8", "."},
 	{".", ".", ".", "4", "1", "9", ".", ".", "5"},
 	{".", ".", ".", ".", "8", ".", ".", "7", "9"},
+}
+
+func resetFunc() {
+	allColumns = [][9]string{
+		{"5", "6", ".", "8", "4", "7", ".", ".", "."},
+		{"3", ".", "9", ".", ".", ".", "6", ".", "."},
+		{".", ".", "8", ".", ".", ".", ".", ".", "."},
+		{".", "1", ".", ".", "8", ".", ".", "4", "."},
+		{"7", "9", ".", "6", ".", "2", ".", "1", "8"},
+		{".", "5", ".", ".", "3", ".", ".", "9", "."},
+		{".", ".", ".", ".", ".", ".", "2", ".", "."},
+		{".", ".", "6", ".", ".", ".", "8", ".", "7"},
+		{".", ".", ".", "3", "1", "6", ".", "5", "9"},
+	}
+
+	allRows = [][9]string{
+		{"5", "3", ".", ".", "7", ".", ".", ".", "."},
+		{"6", ".", ".", "1", "9", "5", ".", ".", "."},
+		{".", "9", "8", ".", ".", ".", ".", "6", "."},
+		{"8", ".", ".", ".", "6", ".", ".", ".", "3"},
+		{"4", ".", ".", "8", ".", "3", ".", ".", "1"},
+		{"7", ".", ".", ".", "2", ".", ".", ".", "6"},
+		{".", "6", ".", ".", ".", ".", "2", "8", "."},
+		{".", ".", ".", "4", "1", "9", ".", ".", "5"},
+		{".", ".", ".", ".", "8", ".", ".", "7", "9"},
+	}
 }
 
 func emptyControl() [][2]int {
@@ -88,24 +111,30 @@ func randomNumber() string {
 	return fmt.Sprintf("%d", rand.Intn(9)+1)
 }
 
-func randomGenerator() {
+func randomGenerator() bool {
 	emptyIndex := emptyControl()
 	for _, index := range emptyIndex {
 		row := index[0]
 		col := index[1]
+		placed := false
 		for i := 0; i < 10; i++ {
 			randomNum := randomNumber()
 
 			if placeNumber(randomNum, row, col) {
 				fmt.Printf("hucre [%d,%d] = %s bulundu\n", row, col, randomNum)
+				placed = true
 				break
 			}
 
-			if i == 9 {
+			if i == 19 {
 				fmt.Printf("hucre [%d,%d] icin uygun sayi bulunamadi\n", row, col)
 			}
 		}
+		if !placed {
+			return false
+		}
 	}
+	return true
 }
 
 func main() {
@@ -122,6 +151,27 @@ func main() {
 	}
 
 	randomGenerator()
+
+	count := 0
+	itsOk := false
+
+	for !itsOk {
+		count++
+		resetFunc()
+		itsOk = randomGenerator()
+
+		if count%1000 == 0 {
+			fmt.Printf("%ddeneme yapiliyor\n", count)
+		}
+
+		if itsOk {
+			fmt.Printf("\nCozum %d.denemede bulundu\n", itsOk)
+			fmt.Println("Son durum:")
+			for i := 0; i < 9; i++ {
+				fmt.Println(allRows[i])
+			}
+		}
+	}
 
 	//TODO En azindan "." nerede oldugunu bulan fonksiyon lazim
 	//TODO random int donen bir fonksiyon
