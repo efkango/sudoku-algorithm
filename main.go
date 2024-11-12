@@ -77,7 +77,7 @@ func correctionCheck(num string, inputColumn, inputRow int) bool {
 	}
 
 	for x := 0; x < 9; x++ {
-		if allColumns[inputRow][x] == num {
+		if allColumns[inputColumn][x] == num {
 			return false
 		}
 	}
@@ -85,7 +85,7 @@ func correctionCheck(num string, inputColumn, inputRow int) bool {
 	startRow := (inputRow / 3) * 3
 	startCol := (inputColumn / 3) * 3
 	for i := 0; i < 3; i++ {
-		for b := 0; i < 3; i++ {
+		for b := 0; b < 3; b++ {
 			if allRows[startRow+i][startCol+b] == num {
 				return false
 			}
