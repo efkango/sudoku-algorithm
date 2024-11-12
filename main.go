@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 var allColumns = [][9]string{
 	{"5", "6", ".", "8", "4", "7", ".", ".", "."},
@@ -79,6 +83,31 @@ func placeNumber(num string, row, col int) bool {
 	return false
 }
 
+func randomNumber() string {
+	rand.Seed(time.Now().UnixNano())
+	return fmt.Sprintf("%d", rand.Intn(9)+1)
+}
+
+func randomGenerator() {
+	emptyIndex := emptyControl()
+	for _, index := range emptyIndex {
+		row := index[0]
+		col := index[1]
+		for i := 0; i < 10; i++ {
+			randomNum := randomNumber()
+
+			if placeNumber(randomNum, row, col) {
+				fmt.Printf("hucre [%d,%d] = %s bulundu\n", row, col, randomNum)
+				break
+			}
+
+			if i == 9 {
+				fmt.Printf("hucre [%d,%d] icin uygun sayi bulunamadi\n", row, col)
+			}
+		}
+	}
+}
+
 func main() {
 	fmt.Println("init")
 	for i := 0; i < 9; i++ {
@@ -91,6 +120,8 @@ func main() {
 	for _, empty := range emptyController {
 		fmt.Printf("satir =  %d, sutun =  %d\n", empty[0], empty[1])
 	}
+
+	randomGenerator()
 
 	//TODO En azindan "." nerede oldugunu bulan fonksiyon lazim
 	//TODO random int donen bir fonksiyon
