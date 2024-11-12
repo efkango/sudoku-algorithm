@@ -77,7 +77,7 @@ func correctionCheck(num string, inputColumn, inputRow int) bool {
 	}
 
 	for x := 0; x < 9; x++ {
-		if allColumns[inputColumn][x] == num {
+		if allColumns[x][inputColumn] == num {
 			return false
 		}
 	}
@@ -126,12 +126,40 @@ func randomGenerator() bool {
 				break
 			}
 
-			if i == 19 {
+			if i == 9 {
 				fmt.Printf("hucre [%d,%d] icin uygun sayi bulunamadi\n", row, col)
 			}
 		}
 		if !placed {
 			return false
+		}
+	}
+	return findCorrectNumbers()
+}
+
+func findCorrectNumbers() bool {
+	for row := 0; row < 9; row++ {
+		numbers := make(map[string]bool)
+		for col := 0; col < 9; col++ {
+			num := allRows[row][col]
+			if num == "." {
+				return false
+			}
+			if numbers[num] {
+				return false
+			}
+			numbers[num] = true
+		}
+	}
+
+	for col := 0; col < 9; col++ {
+		numbers := make(map[string]bool)
+		for row := 0; row < 9; row++ {
+			num := allRows[row][col]
+			if numbers[num] {
+				return false
+			}
+			numbers[num] = true
 		}
 	}
 	return true
@@ -163,9 +191,8 @@ func main() {
 		if count%1000 == 0 {
 			fmt.Printf("%ddeneme yapiliyor\n", count)
 		}
-
 		if itsOk {
-			fmt.Printf("\nCozum %d.denemede bulundu\n", itsOk)
+			fmt.Printf("\nCozum %d.denemede bulundu\n", count)
 			fmt.Println("Son durum:")
 			for i := 0; i < 9; i++ {
 				fmt.Println(allRows[i])
