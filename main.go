@@ -156,9 +156,6 @@ func main() {
 		resetFunc()
 		itsOk = randomGenerator()
 
-		if count%1000 == 0 {
-			fmt.Printf("%ddeneme yapiliyor\n", count)
-		}
 		if itsOk {
 			fmt.Printf("\nCozum %d.denemede bulundu\n", count)
 			fmt.Println("Son durum:")
