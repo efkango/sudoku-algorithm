@@ -148,10 +148,6 @@ func findCorrectNumbers() bool {
 }
 
 func main() {
-	fmt.Println("init")
-	emptyController := emptyControl()
-	fmt.Printf("toplam %d bos hucre\n", len(emptyController))
-
 	count := 0
 	itsOk := false
 
